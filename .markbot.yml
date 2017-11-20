@@ -1,0 +1,78 @@
+repo: 'only-keyboards-allowed'
+canvasCourse: 'web-dev-3'
+
+inherit:
+  - naming-restrict-live
+  - git-2
+  - html
+  - css
+  - screenshots-all
+  - accessibility
+  - modulifier-buttons
+  - aria-landmarks
+  - google-fonts
+  - html-good-semantics
+  - nav-focus
+  - main-link-focus
+
+html:
+  - path: 'index.html'
+
+css:
+  - path: 'css/main.css'
+    has:
+      - ['html', 'font-family', 'Roboto, sans-serif']
+      - ['.section-dark', ['background-color', 'color']]
+      - ['.section-light', ['background-color', 'color']]
+      - ['.section-bg', ['background-size']]
+      - '.btn:not(.btn-ghost)'
+      - '.btn:not(.btn-ghost):hover'
+      - '.btn-ghost:hover'
+      - ['.masthead', 'background-image', 'url("../images/galaxy-evolution-explorer.jpg")']
+      - '.masthead-title'
+      - '.masthead-title::after'
+      - '.masthead a'
+      - '.masthead a:hover'
+      - ['.techniques', 'background-image', 'url("../images/galaxies-in-hiding.jpg")']
+      - ['.satellites', 'background-image', 'url("../images/invisible-galaxies.jpg")']
+      - ['@60', '.masthead-title']
+      - ['@60', '.nav']
+  - path: 'css/modules.css'
+    locked: true
+  - path: 'css/grid.css'
+    locked: true
+  - path: 'css/type.css'
+    locked: true
+
+functionality:
+  - path: 'index.html'
+    tests:
+      - |
+        const rgb = function (rgbstr) {
+          const theColor = rgbstr.match(/rgb\(([\d.]+), ([\d.]+), ([\d.]+)/);
+          theColor.shift();
+          return theColor;
+        };
+
+        const luminanace = function (r, g, b) {
+          var a = [r, g, b].map((v) => {
+            v /= 255;
+            return v <= 0.03928 ? v / 12.92 : Math.pow( (v + 0.055) / 1.055, 2.4 );
+          });
+
+          return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+        };
+
+        const contrast = function (rgb1, rgb2) {
+          return (luminanace(rgb1[0], rgb1[1], rgb1[2]) + 0.05) / (luminanace(rgb2[0], rgb2[1], rgb2[2]) + 0.05);
+        };
+
+        const navLink = $('nav a');
+        const navBg = css($('header')).backgroundColor;
+        const oldOutline = css(navLink).outlineColor;
+
+        navLink.focus();
+
+        if (contrast(rgb(css(navLink).outlineColor), rgb(navBg)) < 4.5) return fail('The contrast of the `outline` for the navigation links isn’t enough compared to the `background-color`');
+
+        pass();

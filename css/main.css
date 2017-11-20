@@ -1,0 +1,85 @@
+html {
+  font-family: Roboto, sans-serif;
+}
+
+.section-dark {
+  background-color: #000308;
+  color: #fff;
+}
+
+.section-light {
+  background-color: #fafafa;
+  color: #222;
+}
+
+.section-bg {
+  background-size: cover;
+}
+
+.btn:not(.btn-ghost) {
+  background-color: #8d483b;
+  border-color: #8d483b;
+}
+
+.btn:not(.btn-ghost):hover {
+  background-color: #e88681;
+}
+
+.btn-ghost:hover {
+  background-color: rgba(180, 220, 255, .5);
+}
+
+.masthead {
+  background-image: url("../images/galaxy-evolution-explorer.jpg");
+}
+
+.masthead-title {
+  position: relative;
+  z-index: 2;
+}
+
+.masthead-title::after {
+  content: attr(data-shadow);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+
+  transform: translate(.07em, .07em);
+
+  color: rgba(180, 220, 255, .6);
+}
+
+.masthead a {
+  border-bottom: .2em solid rgba(255, 255, 255, .6);
+
+  color: #fff;
+  text-decoration: none;
+}
+
+.masthead a:hover {
+  background-color: rgba(180, 220, 255, .3);
+}
+
+.techniques {
+  background-image: url("../images/galaxies-in-hiding.jpg");
+}
+
+.satellites {
+  background-image: url("../images/invisible-galaxies.jpg");
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, .5);
+}
+
+@media only screen and (min-width: 60em) {
+
+  .masthead-title {
+    text-align: left;
+  }
+
+  .nav {
+    text-align: right;
+  }
+
+}
