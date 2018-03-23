@@ -54,7 +54,7 @@ functionality:
           return theColor;
         };
 
-        const luminanace = function (r, g, b) {
+        const luminance = function (r, g, b) {
           var a = [r, g, b].map((v) => {
             v /= 255;
             return v <= 0.03928 ? v / 12.92 : Math.pow( (v + 0.055) / 1.055, 2.4 );
@@ -64,7 +64,7 @@ functionality:
         };
 
         const contrast = function (rgb1, rgb2) {
-          return (luminanace(rgb1[0], rgb1[1], rgb1[2]) + 0.05) / (luminanace(rgb2[0], rgb2[1], rgb2[2]) + 0.05);
+          return (luminance(rgb1[0], rgb1[1], rgb1[2]) + 0.05) / (luminance(rgb2[0], rgb2[1], rgb2[2]) + 0.05);
         };
 
         const navLink = $('nav a');
